@@ -1,0 +1,13 @@
+.user-card {
+  padding: 10px;
+  display: flex;
+
+  div {
+    flex: 1;
+  }
+
+  &__group-btn {
+    display: flex;
+    justify-content: space-between;
+  }
+ }
