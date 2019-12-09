@@ -18,10 +18,11 @@ class UsersList extends Component {
         <h2>Users list</h2>
         {users}
         <hr/>
-        <Link to={'/edit'}>
-          <button>
-            new user
-          </button>
+        <Link
+          to={'/user-form/create-user'}
+          className="users-list__add-new-user"
+        >
+          add new user
         </Link>
       </div>
     );
