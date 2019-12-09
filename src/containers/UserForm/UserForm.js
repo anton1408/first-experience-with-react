@@ -7,31 +7,36 @@ import './UserForm.scss'
 
 function UserForm(props) {
   let { id } = useParams();
-
-  useEffect(() => {
-    props.getSingleUserData(id);
-  }, []);
+  let initialFormValue = {}
 
   const singleUser = props.singleUserData;
-  const onSubmit = async values => {
-    console.log('submit')
+  if(singleUser.first_name && !Number.isNaN(Number(id))) {
+    initialFormValue = {
+      firstName: `${singleUser.first_name}`,
+      lastName: `${singleUser.last_name}`,
+      birth_date: `${singleUser.birth_date}`,
+      gender: `${singleUser.gender}`,
+      job: `${singleUser.job}`,
+      biography: `${singleUser.biography}`,
+      is_active: Boolean(singleUser.is_active),
+    }
   }
 
-  console.log("props", props)
+  useEffect(() => {
+    if(!Number.isNaN(Number(id))) {
+      props.getSingleUserData(id);
+    }
+  }, []);
+
+  const onSubmit = async values => {
+    console.log('submit', id)
+  }
 
   return (
     <div className="user-form">
       <Form
         onSubmit={onSubmit}
-        initialValues={{
-          firstName: `${singleUser.first_name}`,
-          lastName: `${singleUser.last_name}`,
-          birth_date: `${singleUser.birth_date}`,
-          gender: `${singleUser.gender}`,
-          job: `${singleUser.job}`,
-          biography: `${singleUser.biography}`,
-          is_active: Boolean(singleUser.is_active),
-        }}
+        initialValues={initialFormValue}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -104,7 +109,7 @@ function UserForm(props) {
       />
       <hr/>
       <Link
-        to={'/'}
+        to={!Number.isNaN(Number(id)) ? `/user-page/${singleUser.id}` : '/'}
         className="user-form__back-to-home"
       >
         back

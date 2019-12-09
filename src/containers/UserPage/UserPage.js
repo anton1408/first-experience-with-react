@@ -28,7 +28,9 @@ function UserPage(props) {
         <div className="user-details__user-biography">biography: {singleUser.biography}</div>
         <div className="user-details__user-activity">activity: {String(singleUser.is_active)}</div>
         <div className="user-details__group-btn">
-          <button className="btn user-details__edit-btn">edit information</button>
+          <Link to={`/user-form/${singleUser.id}`}>
+            <button className="btn user-card__details-btn">edit information</button>
+          </Link>
           <Link to={'/'}>
             <button
               className="btn user-details__delete-btn"
