@@ -2,8 +2,12 @@ import React, {useEffect} from 'react'
 import {Link, useParams} from "react-router-dom";
 import {Form, Field} from 'react-final-form'
 import {connect} from "react-redux";
-import {getSingleUserData} from "../../redux/actions/actions";
+import {getSingleUserData, createUser} from "../../redux/actions/actions";
 import './UserForm.scss'
+
+function clg() {
+  console.log('create')
+}
 
 function UserForm(props) {
   let { id } = useParams();
@@ -12,8 +16,8 @@ function UserForm(props) {
   const singleUser = props.singleUserData;
   if(singleUser.first_name && !Number.isNaN(Number(id))) {
     initialFormValue = {
-      firstName: `${singleUser.first_name}`,
-      lastName: `${singleUser.last_name}`,
+      first_name: `${singleUser.first_name}`,
+      last_name: `${singleUser.last_name}`,
       birth_date: `${singleUser.birth_date}`,
       gender: `${singleUser.gender}`,
       job: `${singleUser.job}`,
@@ -29,7 +33,9 @@ function UserForm(props) {
   }, []);
 
   const onSubmit = async values => {
-    console.log('submit', id)
+    console.log('submit')
+    console.log(props)
+    props.createUser(values)
   }
 
   return (
@@ -42,7 +48,7 @@ function UserForm(props) {
             <div>
               <label>First Name</label>
               <Field
-                name="firstName"
+                name="first_name"
                 component="input"
                 type="text"
                 placeholder="First Name"
@@ -52,7 +58,7 @@ function UserForm(props) {
             <div>
               <label>Last Name</label>
               <Field
-                name="lastName"
+                name="last_name"
                 component="input"
                 type="text"
                 placeholder="Last Name"
@@ -92,8 +98,8 @@ function UserForm(props) {
               <Field name="is_active" component="input" type="checkbox" />
             </div>
             <div className="buttons">
-              <button type="submit" disabled={submitting || pristine}>
-                Submit
+              <button type="submit" disabled={submitting || pristine} >
+                {!Number.isNaN(Number(id)) ? 'Edit' : 'Create'}
               </button>
               <button
                 type="button"
@@ -103,7 +109,6 @@ function UserForm(props) {
                 Reset
               </button>
             </div>
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}
       />
@@ -124,4 +129,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, ({ getSingleUserData }))(UserForm);
+export default connect(mapStateToProps, ({ getSingleUserData, createUser }))(UserForm);

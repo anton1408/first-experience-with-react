@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
 import "./UsersList.scss"
 import UserCard from "../../components/UserCard/UserCard"
+import {Link} from "react-router-dom";
 
 class UsersList extends Component {
   render() {
