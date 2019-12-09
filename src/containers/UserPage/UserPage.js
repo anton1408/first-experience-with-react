@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
-import "./UserPage.scss"
 import {Link, useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import {
   getSingleUserData,
   deleteUser
 } from "../../redux/actions/actions";
+import "./UserPage.scss"
 
 function UserPage(props) {
   let { id } = useParams();
@@ -39,11 +39,16 @@ function UserPage(props) {
           </Link>
         </div>
       </div>
+      <hr/>
+      <Link
+        to={'/'}
+        className="user-page__back-to-home"
+      >
+        back
+      </Link>
     </div>
   );
 }
-
-
 
 function mapStateToProps(state) {
   return {
