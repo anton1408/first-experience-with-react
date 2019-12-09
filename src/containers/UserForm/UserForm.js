@@ -17,11 +17,21 @@ function UserForm(props) {
     console.log('submit')
   }
 
+  console.log("props", props)
+
   return (
     <div className="user-form">
       <Form
         onSubmit={onSubmit}
-        initialValues={{ firstName: 'Anton', lastName: 'Luganskiy' }}
+        initialValues={{
+          firstName: `${singleUser.first_name}`,
+          lastName: `${singleUser.last_name}`,
+          birth_date: `${singleUser.birth_date}`,
+          gender: `${singleUser.gender}`,
+          job: `${singleUser.job}`,
+          biography: `${singleUser.biography}`,
+          is_active: Boolean(singleUser.is_active),
+        }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -31,6 +41,7 @@ function UserForm(props) {
                 component="input"
                 type="text"
                 placeholder="First Name"
+                value=""
               />
             </div>
             <div>
