@@ -8,7 +8,7 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 
 export function getUsersData() {
   return (dispatch) => {
-    axios.get(`${serverUrl2}/v1/contact/`)
+    axios.get(`${serverUrl}/v1/contact/`)
       .then(function (response) {
         // handle success
         dispatch({type: SET_USER_LIST, payload: response.data})
@@ -26,7 +26,7 @@ export function getUsersData() {
 
 export function getSingleUserData(id) {
   return (dispatch) => {
-    axios.get(`${serverUrl2}/v1/contact/${id}/`)
+    axios.get(`${serverUrl}/v1/contact/${id}/`)
       .then(function (response) {
         // handle success
         dispatch({type: SET_USER_DATA, payload: response.data})
@@ -44,7 +44,7 @@ export function getSingleUserData(id) {
 
 export function deleteUser(id) {
   return (dispatch) => {
-    axios.delete(`${serverUrl2}/v1/contact/${id}/`)
+    axios.delete(`${serverUrl}/v1/contact/${id}/`)
       .then(function (response) {
         // handle success
 
@@ -63,7 +63,7 @@ export function deleteUser(id) {
 export function createUser(obj) {
   console.log('action', obj)
   return (dispatch) => {
-    axios.post(`${serverUrl2}/v1/contact/`, obj)
+    axios.post(`${serverUrl}/v1/contact/`, obj)
       .then(function (response) {
         // handle success
 
